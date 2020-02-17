@@ -2,7 +2,7 @@
  * rc-datetime-picker v1.6.1
  * https://github.com/AllenWooooo/rc-datetime-picker
  *
- * (c) 2018 Allen Wu
+ * (c) 2020 Allen Wu
  * License: MIT
  */
 (function (global, factory) {
@@ -276,7 +276,7 @@ var Day = function (_Component) {
           changePanel = _props.changePanel;
 
       var _moment = this.state.moment;
-      var firstDay = _moment.clone().date(1).day();
+      var firstDay = _moment.clone().date(1).weekday();
       var endOfThisMonth = _moment.clone().endOf('month').date();
       var endOfLastMonth = _moment.clone().subtract(1, 'month').endOf('month').date();
       var days = [].concat(range(endOfLastMonth - firstDay + 1, endOfLastMonth + 1), range(1, endOfThisMonth + 1), range(1, 42 - endOfThisMonth - firstDay + 1));
@@ -456,7 +456,8 @@ var Month = function (_Component) {
       var _this2 = this;
 
       var _moment = this.state.moment;
-      var months = MONTHS;
+      var _props$months = this.props.months,
+          months = _props$months === undefined ? MONTHS : _props$months;
       var _props = this.props,
           changePanel = _props.changePanel,
           style = _props.style;
@@ -1702,10 +1703,12 @@ var Trigger = function (_Component) {
     _this.handleChange = function (moment$$1, currentPanel) {
       var _this$props = _this.props,
           closeOnSelectDay = _this$props.closeOnSelectDay,
-          onChange = _this$props.onChange;
+          onChange = _this$props.onChange,
+          _this$props$minPanel = _this$props.minPanel,
+          minPanel = _this$props$minPanel === undefined ? 'day' : _this$props$minPanel;
 
 
-      if (currentPanel === 'day' && closeOnSelectDay) {
+      if (currentPanel === minPanel || currentPanel === 'day') {
         _this.setState({
           isOpen: false
         });
