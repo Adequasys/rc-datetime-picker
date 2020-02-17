@@ -137,7 +137,7 @@ class Day extends Component {
   render() {
     const {weeks = WEEKS, dayFormat = DAY_FORMAT, style, changePanel} = this.props;
     const _moment = this.state.moment;
-    const firstDay = _moment.clone().date(1).day();
+    const firstDay = _moment.clone().date(1).weekday();
     const endOfThisMonth = _moment.clone().endOf('month').date();
     const endOfLastMonth = _moment.clone().subtract(1, 'month').endOf('month').date();
     const days = [].concat(
