@@ -48,9 +48,9 @@ class Trigger extends Component {
   }
 
   handleChange = (moment, currentPanel) => {
-    const {closeOnSelectDay, onChange} = this.props;
+    const {closeOnSelectDay, onChange, minPanel = 'day'} = this.props;
 
-    if (currentPanel === 'day' && closeOnSelectDay) {
+    if (currentPanel === minPanel || currentPanel === 'day') {
       this.setState({
         isOpen: false
       });
